@@ -1,0 +1,80 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light dark;
+}
+
+html {
+  scroll-behavior: auto;
+}
+
+html.dark body {
+  background-color: #09090F;
+  color: #E8E8F4;
+}
+
+html:not(.dark) body {
+  background-color: #CCCAD8;
+  color: #0D0C1A;
+}
+
+body {
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── Force visible borders in light mode ── */
+html:not(.dark) [class*="border-l-border"],
+html:not(.dark) .border {
+  border-color: #7B78A0;
+}
+
+body.flickering {
+  animation: flicker 0.22s ease-out;
+}
+
+@keyframes flicker {
+  0% {
+    opacity: 1;
+  }
+
+  20% {
+    opacity: 0.04;
+  }
+
+  40% {
+    opacity: 0.92;
+  }
+
+  60% {
+    opacity: 0.08;
+  }
+
+  80% {
+    opacity: 0.96;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+::view-transition-old(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+
+::view-transition-new(root) {
+  animation: radial-reveal 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes radial-reveal {
+  from {
+    clip-path: circle(0% at var(--vt-x, 95%) var(--vt-y, 8%));
+  }
+
+  to {
+    clip-path: circle(160% at var(--vt-x, 95%) var(--vt-y, 8%));
+  }
+}
