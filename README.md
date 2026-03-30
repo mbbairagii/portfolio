@@ -108,9 +108,7 @@ PORTFOLIO/
 
 ---
 
-## License
-
-MIT — free to use as inspiration. Please don't copy it whole.
+## free to use as inspiration. Please don't copy it whole.
 
 ---
 
