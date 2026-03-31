@@ -219,7 +219,7 @@ export default function Home() {
 
             {/* Photo */}
             <div className="shrink-0">
-              <div className="relative h-[130px] w-[100px] md:h-[200px] md:w-[160px] overflow-hidden rounded-xl dark:border dark:border-d-border border border-l-border">
+              <div className="relative h-[160px] w-[125px] md:h-[260px] md:w-[200px] overflow-hidden rounded-2xl dark:border dark:border-d-border border border-l-border shadow-lg">
                 <Image src="/avatar.png" alt="Mohini" fill className="object-cover object-top" priority />
                 <div className="absolute inset-0 bg-gradient-to-t from-d-accent/10 via-transparent to-transparent" />
               </div>

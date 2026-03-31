@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { GitHubCalendar } from "react-github-calendar";
 
 const EMAIL_START = new Date("2023-08-01").getTime();
 
@@ -11,10 +12,19 @@ export default function SillyStats() {
     const [scrollPx, setScrollPx] = useState(0);
     const [lastClick, setLastClick] = useState(0);
     const [rageClicks, setRageClicks] = useState(0);
+    const [isDark, setIsDark] = useState(true);
 
-    // Mount first — THEN start all browser-dependent stuff
     useEffect(() => {
         setMounted(true);
+
+        const updateTheme = () =>
+            setIsDark(document.documentElement.classList.contains("dark"));
+        updateTheme();
+        const observer = new MutationObserver(updateTheme);
+        observer.observe(document.documentElement, {
+            attributes: true,
+            attributeFilter: ["class"],
+        });
 
         const tick = setInterval(() => setSeconds((s) => s + 1), 1000);
         const onScroll = () => setScrollPx((p) => p + 1);
@@ -32,13 +42,13 @@ export default function SillyStats() {
         window.addEventListener("scroll", onScroll, { passive: true });
 
         return () => {
+            observer.disconnect();
             clearInterval(tick);
             window.removeEventListener("mousedown", onMouseDown);
             window.removeEventListener("scroll", onScroll);
         };
     }, []);
 
-    // All browser-only values computed after mount
     const chaiCount = mounted
         ? `${(Math.floor((Date.now() - EMAIL_START) / 86_400_000) * 3).toLocaleString()}+`
         : "...";
@@ -128,14 +138,17 @@ export default function SillyStats() {
                     <div
                         key={s.label}
                         className={`rounded-xl border px-4 py-3.5 transition-colors
-              ${s.accent
+                            ${s.accent
                                 ? "dark:border-d-accent/30 border-l-accent/30 dark:bg-d-accent/5 bg-l-accent/5"
                                 : "dark:border-d-border border-l-border dark:bg-d-bg/60 bg-l-bg/60"
                             }`}
                     >
                         <div className="flex items-center gap-1.5 mb-1">
                             <p className={`font-mono text-base font-semibold tabular-nums
-                ${s.accent ? "dark:text-d-accent text-l-accent" : "dark:text-zinc-200 text-zinc-800"}`}>
+                                ${s.accent
+                                    ? "dark:text-d-accent text-l-accent"
+                                    : "dark:text-zinc-200 text-zinc-800"
+                                }`}>
                                 {s.value}
                             </p>
                             {s.live && (
@@ -152,23 +165,44 @@ export default function SillyStats() {
                 ))}
             </div>
 
-            {/* GitHub chart */}
-            <div className="mt-8">
-                <div className="mb-3 flex items-center justify-between">
-                    <p className="font-mono text-[11px] dark:text-zinc-600 text-zinc-400">commit history</p>
-                    <a href="https://github.com/mbbairagii" target="_blank" rel="noopener noreferrer"
-                        className="font-mono text-[11px] dark:text-d-accent text-l-accent transition-opacity hover:opacity-70">
-                        github ↗
-                    </a>
-                </div>
-                <div className="overflow-hidden rounded-xl dark:border dark:border-d-border border border-l-border dark:bg-d-bg/60 bg-l-bg/60 p-4">
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img
-                        src="https://ghchart.rshah.org/818cf8/mbbairagii"
-                        alt="GitHub contributions"
-                        className="w-full dark:opacity-80 opacity-60"
-                    />
-                </div>
+            <div className="rounded-xl dark:border dark:border-d-border border border-l-border dark:bg-d-bg/60 bg-l-bg/60 px-4 pt-4 pb-3 flex flex-col items-center gap-3 [&_footer]:!hidden">
+                {mounted && (
+                    <>
+                        <div className="w-full overflow-x-auto">
+                            <div className="flex justify-center">
+                                <GitHubCalendar
+                                    username="mbbairagii"
+                                    year={2026}
+                                    colorScheme={isDark ? "dark" : "light"}
+                                    theme={{
+                                        dark: ["#1e1e2e", "#312e81", "#4338ca", "#6366f1", "#818cf8"],
+                                        light: ["#e8e6f0", "#c7d2fe", "#a5b4fc", "#6366f1", "#4F46E5"],
+                                    }}
+                                    fontSize={11}
+                                    blockSize={11}
+                                    blockRadius={3}
+                                    blockMargin={4}
+                                />
+                            </div>
+                        </div>
+
+                        {/* Custom Less/More legend */}
+                        <div className="flex items-center gap-2">
+                            <span className="font-mono text-[9px] dark:text-zinc-600 text-zinc-400">less</span>
+                            {["#1e1e2e", "#312e81", "#4338ca", "#6366f1", "#818cf8"].map((dark, i) => {
+                                const light = ["#e8e6f0", "#c7d2fe", "#a5b4fc", "#6366f1", "#4F46E5"][i];
+                                return (
+                                    <span
+                                        key={i}
+                                        className="h-[11px] w-[11px] rounded-[3px] inline-block"
+                                        style={{ backgroundColor: isDark ? dark : light }}
+                                    />
+                                );
+                            })}
+                            <span className="font-mono text-[9px] dark:text-zinc-600 text-zinc-400">more</span>
+                        </div>
+                    </>
+                )}
             </div>
         </section>
     );

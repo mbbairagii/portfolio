@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 const VIDEO_ID = "ue2G0dC-TZI";
@@ -9,6 +9,26 @@ export default function MusicPlayer() {
     const [expanded, setExpanded] = useState(false);
     const [loaded, setLoaded] = useState(false);
     const [hovered, setHovered] = useState(false);
+    const [isDark, setIsDark] = useState(true);
+
+    useEffect(() => {
+        const update = () =>
+            setIsDark(document.documentElement.classList.contains("dark"));
+        update();
+        const observer = new MutationObserver(update);
+        observer.observe(document.documentElement, {
+            attributes: true,
+            attributeFilter: ["class"],
+        });
+        return () => observer.disconnect();
+    }, []);
+
+    const card = isDark ? "#0F0F1A" : "#E8E6F0";
+    const border = isDark ? "#1e1e2e" : "#C4C2D4";
+    const accent = isDark ? "#818CF8" : "#4F46E5";
+    const text = isDark ? "#f4f4f5" : "#1a1a2e";
+    const sub = isDark ? "#52525b" : "#71717a";
+    const bg = isDark ? "#09090F" : "#DDDBE8";
 
     return (
         <motion.div
@@ -19,7 +39,6 @@ export default function MusicPlayer() {
         >
             <AnimatePresence mode="wait">
 
-                {/* ── Expanded card ── */}
                 {expanded ? (
                     <motion.div
                         key="expanded"
@@ -27,32 +46,45 @@ export default function MusicPlayer() {
                         animate={{ opacity: 1, scale: 1, y: 0 }}
                         exit={{ opacity: 0, scale: 0.9, y: 8 }}
                         transition={{ duration: 0.22, ease: [0.16, 1, 0.3, 1] }}
-                        className="w-[260px] md:w-72 rounded-2xl border border-d-border bg-d-card p-3 md:p-4 shadow-2xl shadow-black/60"
+                        style={{ backgroundColor: card, borderColor: border }}
+                        className="w-[260px] md:w-72 rounded-2xl border p-3 md:p-4 shadow-2xl shadow-black/20"
                     >
                         <div className="mb-3 flex items-start justify-between">
                             <div>
-                                <p className="font-mono text-[9px] uppercase tracking-widest text-d-accent mb-0.5">
+                                <p style={{ color: accent }}
+                                    className="font-mono text-[9px] uppercase tracking-widest mb-0.5">
                                     now playing
                                 </p>
-                                <p className="font-display text-[12px] md:text-[13px] font-semibold text-zinc-100">
+                                <p style={{ color: text }}
+                                    className="font-display text-[12px] md:text-[13px] font-semibold">
                                     Du bist nicht allein
                                 </p>
-                                <p className="font-mono text-[10px] text-zinc-600 mt-0.5">
+                                <p style={{ color: sub }}
+                                    className="font-mono text-[10px] mt-0.5">
                                     Roy Black · 1965
                                 </p>
                             </div>
                             <button
                                 onClick={() => setExpanded(false)}
-                                className="font-mono text-[10px] text-zinc-600 hover:text-zinc-300 transition-colors"
+                                style={{ color: sub }}
+                                className="font-mono text-[10px] transition-opacity hover:opacity-70"
                             >
                                 ✕
                             </button>
                         </div>
 
-                        <div className="relative overflow-hidden rounded-xl border border-d-border bg-black">
+                        <div
+                            style={{ borderColor: border, backgroundColor: bg }}
+                            className="relative overflow-hidden rounded-xl border"
+                        >
                             {!loaded && (
-                                <div className="absolute inset-0 flex items-center justify-center bg-d-bg">
-                                    <p className="font-mono text-[10px] text-zinc-600">loading...</p>
+                                <div
+                                    style={{ backgroundColor: bg }}
+                                    className="absolute inset-0 flex items-center justify-center"
+                                >
+                                    <p style={{ color: sub }} className="font-mono text-[10px]">
+                                        loading...
+                                    </p>
                                 </div>
                             )}
                             <iframe
@@ -69,7 +101,8 @@ export default function MusicPlayer() {
                             href={`https://www.youtube.com/watch?v=${VIDEO_ID}`}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="mt-2 block text-center font-mono text-[9px] text-zinc-700 transition-colors hover:text-zinc-500"
+                            style={{ color: sub }}
+                            className="mt-2 block text-center font-mono text-[9px] transition-opacity hover:opacity-70"
                         >
                             open on youtube ↗
                         </a>
@@ -77,13 +110,11 @@ export default function MusicPlayer() {
 
                 ) : (
 
-                    /* ── Square widget ── */
                     <div
                         className="relative"
                         onMouseEnter={() => setHovered(true)}
                         onMouseLeave={() => setHovered(false)}
                     >
-                        {/* Tooltip */}
                         <AnimatePresence>
                             {hovered && (
                                 <motion.div
@@ -91,10 +122,18 @@ export default function MusicPlayer() {
                                     animate={{ opacity: 1, x: 0 }}
                                     exit={{ opacity: 0, x: -4 }}
                                     transition={{ duration: 0.15 }}
-                                    className="absolute bottom-full left-0 mb-2 whitespace-nowrap rounded-lg border border-d-accent/30 bg-d-card px-2.5 py-1.5 shadow-lg"
+                                    style={{
+                                        backgroundColor: card,
+                                        borderColor: `${accent}4D`,
+                                    }}
+                                    className="absolute bottom-full left-0 mb-2 whitespace-nowrap rounded-lg border px-2.5 py-1.5 shadow-lg"
                                 >
-                                    <p className="font-mono text-[9px] text-d-accent">▶ play music</p>
-                                    <p className="font-mono text-[8px] text-zinc-600 mt-0.5">du bist nicht allein</p>
+                                    <p style={{ color: accent }} className="font-mono text-[9px]">
+                                        ▶ play music
+                                    </p>
+                                    <p style={{ color: sub }} className="font-mono text-[8px] mt-0.5">
+                                        du bist nicht allein
+                                    </p>
                                 </motion.div>
                             )}
                         </AnimatePresence>
@@ -108,34 +147,49 @@ export default function MusicPlayer() {
                             onClick={() => setExpanded(true)}
                             whileHover={{ scale: 1.08 }}
                             whileTap={{ scale: 0.93 }}
-                            className="relative flex h-16 w-16 flex-col items-center justify-center gap-2 rounded-2xl border border-d-accent/60 bg-d-card shadow-xl shadow-d-accent/20 overflow-hidden"
-                            style={{ minHeight: "4rem", minWidth: "4rem" }}
+                            style={{
+                                backgroundColor: card,
+                                borderColor: `${accent}99`,
+                                boxShadow: `0 8px 30px ${accent}33`,
+                                minHeight: "4rem",
+                                minWidth: "4rem",
+                            }}
+                            className="relative flex h-16 w-16 flex-col items-center justify-center gap-2 rounded-2xl border overflow-hidden"
                         >
-                            {/* Glow bg */}
-                            <div className="pointer-events-none absolute inset-0 rounded-2xl bg-d-accent/8" />
-
-                            {/* Pulse ring */}
+                            <div
+                                style={{ backgroundColor: `${accent}14` }}
+                                className="pointer-events-none absolute inset-0 rounded-2xl"
+                            />
                             <motion.div
-                                className="pointer-events-none absolute inset-0 rounded-2xl border border-d-accent/40"
+                                style={{ borderColor: `${accent}66` }}
+                                className="pointer-events-none absolute inset-0 rounded-2xl border"
                                 animate={{ scale: [1, 1.14, 1], opacity: [0.6, 0, 0.6] }}
                                 transition={{ duration: 2.4, repeat: Infinity, ease: "easeInOut" }}
                             />
-
-                            {/* Play circle */}
-                            <div className="relative flex h-6 w-6 items-center justify-center rounded-full bg-d-accent/20 border border-d-accent/50">
+                            <div
+                                style={{
+                                    backgroundColor: `${accent}33`,
+                                    borderColor: `${accent}80`,
+                                }}
+                                className="relative flex h-6 w-6 items-center justify-center rounded-full border"
+                            >
                                 <svg width="8" height="9" viewBox="0 0 8 9" fill="none">
-                                    <path d="M1.5 1.5L6.5 4.5L1.5 7.5V1.5Z" fill="#818CF8" />
+                                    <path d="M1.5 1.5L6.5 4.5L1.5 7.5V1.5Z" fill={accent} />
                                 </svg>
                             </div>
-
-                            {/* Waveform */}
                             <div className="relative flex items-end gap-[2px] h-3">
                                 {[2, 6, 4, 8, 3, 6, 2].map((h, i) => (
                                     <motion.span
                                         key={i}
-                                        className="w-[2px] rounded-full bg-d-accent/70"
+                                        style={{ backgroundColor: `${accent}B3` }}
+                                        className="w-[2px] rounded-full"
                                         animate={{ height: [`${h}px`, `${h + 5}px`, `${h}px`] }}
-                                        transition={{ duration: 1.1, repeat: Infinity, delay: i * 0.14, ease: "easeInOut" }}
+                                        transition={{
+                                            duration: 1.1,
+                                            repeat: Infinity,
+                                            delay: i * 0.14,
+                                            ease: "easeInOut",
+                                        }}
                                     />
                                 ))}
                             </div>
