@@ -154,8 +154,8 @@ export default function Home() {
         </AnimatePresence>
       </header>
 
-      {/* ── Rope — desktop only ──────────────────────────────── */}
-      <div className="hidden md:block fixed right-7 top-6 z-50">
+      {/* ── Rope ─────────────────────────────────────────────── */}
+      <div className="fixed right-4 top-16 md:right-7 md:top-6 z-50">
         <RopePull />
       </div>
 
@@ -209,7 +209,6 @@ export default function Home() {
                     {s.l} ↗
                   </a>
                 ))}
-                {/* ← updated to resume_latest.pdf */}
                 <a href="/resume_latest.pdf" target="_blank" rel="noopener noreferrer"
                   className="flex items-center gap-1.5 rounded-full dark:bg-d-accent/10 bg-l-accent/10 dark:border dark:border-d-accent/30 border border-l-accent/30 px-3 md:px-4 py-1.5 font-mono text-[11px] md:text-xs dark:text-d-accent text-l-accent transition-colors dark:hover:bg-d-accent/20 hover:bg-l-accent/20">
                   resume ↗
