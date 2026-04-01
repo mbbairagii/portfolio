@@ -30,7 +30,7 @@ export const projects: Project[] = [
     gradient: "from-[#1a2015] via-[#1e2d1a] to-[#12180f]",
     initials: "DR",
     featured: true,
-    screenshot: "/screenshots/drafts-2.png",
+    screenshot: "/screenshots/drafts-2.webp",
   },
   {
     id: "solana-xray",
@@ -48,7 +48,7 @@ export const projects: Project[] = [
     gradient: "from-[#1a1030] via-[#2d1f5e] to-[#0f2040]",
     initials: "TX",
     featured: true,
-    screenshot: "/screenshots/solana-xray.png",
+    screenshot: "/screenshots/solana-xray.webp",
   },
   {
     id: "travel-wiz",
@@ -78,6 +78,6 @@ export const projects: Project[] = [
     github: "https://github.com/mbbairagii/the-wall",
     gradient: "from-[#1a0f0f] via-[#2a1a1a] to-[#0f0a0a]",
     initials: "TW",
-    screenshot: "/screenshots/thewall.png",
+    screenshot: "/screenshots/thewall.webp",
   },
 ];

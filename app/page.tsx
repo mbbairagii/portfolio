@@ -264,11 +264,13 @@ export default function Home() {
                 {/* Screenshot */}
                 {p.screenshot && (
                   <div className="relative w-full h-36 overflow-hidden">
-                    <img
+                    <Image
                       src={p.screenshot}
                       alt={`${p.title} preview`}
-                      className="w-full h-full object-cover object-top transition-transform duration-500 hover:scale-105"
-                      loading="lazy"
+                      fill
+                      sizes="(max-width: 768px) 100vw, 50vw"
+                      className="object-cover object-top transition-transform duration-500 hover:scale-105"
+                      quality={75}
                     />
                     <div className="absolute inset-0 bg-gradient-to-b dark:from-transparent dark:to-d-bg/80 from-transparent to-l-bg/80" />
                   </div>
