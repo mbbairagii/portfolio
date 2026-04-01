@@ -187,7 +187,7 @@ export default function Home() {
               </div>
 
               <p className="font-mono text-xs md:text-sm dark:text-zinc-500 text-zinc-500">
-                cs @ gl bajaj · i build complete products end-to-end.
+                cs @ gl bajaj · i build obsessively.
               </p>
 
               <div className="flex items-center gap-3 flex-wrap">
