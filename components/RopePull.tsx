@@ -26,16 +26,16 @@ export default function RopePull() {
     if (isTouch) opacity.set(1);
   }, [opacity]);
 
-  const k0 = useTransform(pullY, (v) => v * 0.04);
-  const k1 = useTransform(pullY, (v) => v * 0.09);
-  const k2 = useTransform(pullY, (v) => v * 0.14);
-  const k3 = useTransform(pullY, (v) => v * 0.18);
-  const k4 = useTransform(pullY, (v) => v * 0.22);
-  const k5 = useTransform(pullY, (v) => v * 0.26);
-  const k6 = useTransform(pullY, (v) => v * 0.30);
-  const k7 = useTransform(pullY, (v) => v * 0.33);
-  const k8 = useTransform(pullY, (v) => v * 0.36);
-  const k9 = useTransform(pullY, (v) => v * 0.39);
+  const k0  = useTransform(pullY, (v) => v * 0.04);
+  const k1  = useTransform(pullY, (v) => v * 0.09);
+  const k2  = useTransform(pullY, (v) => v * 0.14);
+  const k3  = useTransform(pullY, (v) => v * 0.18);
+  const k4  = useTransform(pullY, (v) => v * 0.22);
+  const k5  = useTransform(pullY, (v) => v * 0.26);
+  const k6  = useTransform(pullY, (v) => v * 0.30);
+  const k7  = useTransform(pullY, (v) => v * 0.33);
+  const k8  = useTransform(pullY, (v) => v * 0.36);
+  const k9  = useTransform(pullY, (v) => v * 0.39);
   const k10 = useTransform(pullY, (v) => v * 0.42);
   const knotYs = [k0, k1, k2, k3, k4, k5, k6, k7, k8, k9, k10];
   const ringY = useTransform(pullY, (v) => v);

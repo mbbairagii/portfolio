@@ -10,14 +10,16 @@ export interface Project {
   gradient: string;
   initials: string;
   featured?: boolean;
+  screenshot?: string;
 }
+
 
 export const projects: Project[] = [
   {
     id: "drafts",
     title: "Drafts.",
     date: "2026",
-    description: "A full-stack digital diary that actually feels like a real one.",
+    description: "What if a digital diary actually felt private? E2E encrypted journal with rich text, per-entry locks & tag system.",
     bullets: [
       "JWT auth, bcrypt per-diary password locks, CSS page-flip animations, diary pages as structured JSON across 5+ security layers.",
       "Canvas editor with 8+ drawing tools — pen, highlighter, eraser — drag-and-drop stickers with resize/rotate, photo uploads, per-page composite blend modes.",
@@ -28,6 +30,7 @@ export const projects: Project[] = [
     gradient: "from-[#1a2015] via-[#1e2d1a] to-[#12180f]",
     initials: "DR",
     featured: true,
+    screenshot: "/screenshots/drafts-2.png",
   },
   {
     id: "solana-xray",
@@ -45,6 +48,7 @@ export const projects: Project[] = [
     gradient: "from-[#1a1030] via-[#2d1f5e] to-[#0f2040]",
     initials: "TX",
     featured: true,
+    screenshot: "/screenshots/solana-xray.png",
   },
   {
     id: "travel-wiz",
@@ -74,5 +78,6 @@ export const projects: Project[] = [
     github: "https://github.com/mbbairagii/the-wall",
     gradient: "from-[#1a0f0f] via-[#2a1a1a] to-[#0f0a0a]",
     initials: "TW",
+    screenshot: "/screenshots/thewall.png",
   },
 ];

@@ -187,7 +187,7 @@ export default function Home() {
               </div>
 
               <p className="font-mono text-xs md:text-sm dark:text-zinc-500 text-zinc-500">
-                cs @ gl bajaj · i build obsessively.
+                cs @ gl bajaj · i obsess over details most people skip.
               </p>
 
               <div className="flex items-center gap-3 flex-wrap">
@@ -259,39 +259,55 @@ export default function Home() {
               <motion.div key={p.id}
                 whileHover={{ y: -2 }}
                 transition={{ type: "spring", stiffness: 300, damping: 24 }}
-                className="flex flex-col gap-3 rounded-xl dark:border dark:border-d-border border border-l-border dark:bg-d-bg/60 bg-l-bg/60 p-4 md:p-5"
+                className="flex flex-col rounded-xl dark:border dark:border-d-border border border-l-border dark:bg-d-bg/60 bg-l-bg/60 overflow-hidden"
               >
-                <div className="flex items-baseline justify-between gap-2">
-                  <a href={p.live ?? p.github ?? "#"} target="_blank" rel="noopener noreferrer"
-                    className="font-display text-[14px] md:text-[15px] font-semibold dark:text-zinc-100 text-zinc-900 transition-colors dark:hover:text-d-accent hover:text-l-accent">
-                    {p.title} ↗
-                  </a>
-                  {p.date && (
-                    <span className="font-mono text-[10px] shrink-0 dark:text-zinc-600 text-zinc-400">{p.date}</span>
-                  )}
+                {/* Screenshot */}
+                {p.screenshot && (
+                  <div className="relative w-full h-36 overflow-hidden">
+                    <img
+                      src={p.screenshot}
+                      alt={`${p.title} preview`}
+                      className="w-full h-full object-cover object-top transition-transform duration-500 hover:scale-105"
+                      loading="lazy"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-b dark:from-transparent dark:to-d-bg/80 from-transparent to-l-bg/80" />
+                  </div>
+                )}
+
+                {/* Content */}
+                <div className="flex flex-col gap-3 p-4 md:p-5">
+                  <div className="flex items-baseline justify-between gap-2">
+                    <a href={p.live ?? p.github ?? "#"} target="_blank" rel="noopener noreferrer"
+                      className="font-display text-[14px] md:text-[15px] font-semibold dark:text-zinc-100 text-zinc-900 transition-colors dark:hover:text-d-accent hover:text-l-accent">
+                      {p.title} ↗
+                    </a>
+                    {p.date && (
+                      <span className="font-mono text-[10px] shrink-0 dark:text-zinc-600 text-zinc-400">{p.date}</span>
+                    )}
+                  </div>
+
+                  <div className="flex flex-wrap gap-1.5">
+                    {p.tech.map((t: string) => (
+                      <span key={t}
+                        className="rounded-full dark:border dark:border-d-accent/25 border border-l-accent/25 px-2.5 py-0.5 font-mono text-[10px] dark:text-d-accent text-l-accent">
+                        {t}
+                      </span>
+                    ))}
+                  </div>
+
+                  <p className="text-sm font-medium dark:text-zinc-300 text-zinc-700 leading-snug">
+                    {p.description}
+                  </p>
+
+                  <ul className="flex flex-col gap-1.5">
+                    {p.bullets.map((b: string, i: number) => (
+                      <li key={i} className="flex gap-2 text-[12px] md:text-[13px] dark:text-zinc-500 text-zinc-500 leading-relaxed">
+                        <span className="mt-1.5 h-1 w-1 shrink-0 rounded-full dark:bg-d-accent/40 bg-l-accent/40" />
+                        {b}
+                      </li>
+                    ))}
+                  </ul>
                 </div>
-
-                <div className="flex flex-wrap gap-1.5">
-                  {p.tech.map((t: string) => (
-                    <span key={t}
-                      className="rounded-full dark:border dark:border-d-accent/25 border border-l-accent/25 px-2.5 py-0.5 font-mono text-[10px] dark:text-d-accent text-l-accent">
-                      {t}
-                    </span>
-                  ))}
-                </div>
-
-                <p className="text-sm font-medium dark:text-zinc-300 text-zinc-700 leading-snug">
-                  {p.description}
-                </p>
-
-                <ul className="flex flex-col gap-1.5">
-                  {p.bullets.map((b: string, i: number) => (
-                    <li key={i} className="flex gap-2 text-[12px] md:text-[13px] dark:text-zinc-500 text-zinc-500 leading-relaxed">
-                      <span className="mt-1.5 h-1 w-1 shrink-0 rounded-full dark:bg-d-accent/40 bg-l-accent/40" />
-                      {b}
-                    </li>
-                  ))}
-                </ul>
               </motion.div>
             ))}
           </div>
@@ -321,6 +337,18 @@ export default function Home() {
                 </p>
               </motion.div>
             ))}
+          </div>
+
+          {/* ── currently obsessing over ── */}
+          <div className="mt-6 pt-5 border-t dark:border-d-border border-l-border flex flex-wrap items-center gap-x-3 gap-y-1 md:gap-6">
+            <span className="font-mono text-[10px] uppercase tracking-[0.18em] shrink-0 dark:text-zinc-600 text-zinc-400">
+              currently obsessing over
+            </span>
+            <span className="hidden md:inline dark:text-zinc-600 text-zinc-300 text-xs">·</span>
+            <span className="font-mono text-xs dark:text-zinc-300 text-zinc-700">
+              <span className="dark:text-d-accent text-l-accent mr-2">→</span>
+              Rust · Web3 ecosystem
+            </span>
           </div>
         </div>
 
@@ -395,6 +423,26 @@ export default function Home() {
             </div>
           )}
         </div>
+
+        {/* ── CTA ───────────────────────────────────────────── */}
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+          className="rounded-2xl dark:border dark:border-d-border border border-l-border dark:bg-d-card bg-l-card px-6 md:px-10 py-8 md:py-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-5"
+        >
+          <p className="font-display text-lg md:text-2xl font-medium dark:text-zinc-200 text-zinc-800 leading-snug">
+            liked what you saw?{" "}
+            <span className="dark:text-zinc-500 text-zinc-400">let's build something.</span>
+          </p>
+          <button
+            onClick={() => setShowContact(true)}
+            className="shrink-0 rounded-full dark:bg-d-accent/10 bg-l-accent/10 dark:border dark:border-d-accent/40 border border-l-accent/40 px-6 py-2.5 font-mono text-xs dark:text-d-accent text-l-accent transition-all dark:hover:bg-d-accent/20 hover:bg-l-accent/20 dark:hover:border-d-accent hover:border-l-accent"
+          >
+            get in touch ↗
+          </button>
+        </motion.div>
 
         {/* ── FOOTER ────────────────────────────────────────── */}
         <footer className="pt-2 pb-0">

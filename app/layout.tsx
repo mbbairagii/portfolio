@@ -4,7 +4,7 @@ import "../styles/globals.css";
 export const metadata: Metadata = {
   title: "Mohini | Portfolio",
   description: "Full-stack developer. cs @ gl bajaj · i build complete products end-to-end.",
-  metadataBase: new URL("http://localhost:3000"), // ← replace with your real URL
+  metadataBase: new URL("https://portfolio-rouge-ten-30.vercel.app/"), // ← replace with your actual URL
   icons: {
     icon: [
       { url: "/favicon-16.png", sizes: "16x16", type: "image/png" },
@@ -16,12 +16,14 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: "Mohini | Portfolio",
-    description: "Full-stack developer. cs @ gl bajaj.",
-    images: [{ url: "/og-image.png", width: 1200, height: 630 }],
+    description: "Full-stack developer. cs @ gl bajaj · i obsess over details most people skip.",
+    url: "https://portfolio-rouge-ten-30.vercel.app/", // ← same URL here
+    images: [{ url: "/og-image.png", width: 1200, height: 630, alt: "Mohini — Full-stack Developer" }],
   },
   twitter: {
     card: "summary_large_image",
     title: "Mohini | Portfolio",
+    description: "Full-stack developer. cs @ gl bajaj · i obsess over details most people skip.",
     images: ["/og-image.png"],
   },
 };
