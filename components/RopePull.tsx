@@ -1,12 +1,15 @@
 "use client";
 
+
 import { useEffect, useRef, useState } from "react";
 import { animate, motion, useSpring, useTransform } from "framer-motion";
 import { useTheme } from "@/lib/theme";
 
+
 const KNOT_COUNT = 11;
 const ROPE_HEIGHT = 300;
 const SPACING = ROPE_HEIGHT / (KNOT_COUNT + 1);
+
 
 export default function RopePull() {
   const { theme, toggleTheme, mounted } = useTheme();
@@ -15,30 +18,33 @@ export default function RopePull() {
   const [isTouchDevice, setIsTouchDevice] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
 
+
   const pullY = useSpring(0, { stiffness: 260, damping: 22, mass: 1.1 });
   const swayRotate = useSpring(0, { stiffness: 110, damping: 11 });
   const opacity = useSpring(0.35, { stiffness: 200, damping: 20 });
 
-  // Detect touch/mobile device and set full opacity
+
   useEffect(() => {
     const isTouch = window.matchMedia("(hover: none)").matches;
     setIsTouchDevice(isTouch);
     if (isTouch) opacity.set(1);
   }, [opacity]);
 
-  const k0  = useTransform(pullY, (v) => v * 0.04);
-  const k1  = useTransform(pullY, (v) => v * 0.09);
-  const k2  = useTransform(pullY, (v) => v * 0.14);
-  const k3  = useTransform(pullY, (v) => v * 0.18);
-  const k4  = useTransform(pullY, (v) => v * 0.22);
-  const k5  = useTransform(pullY, (v) => v * 0.26);
-  const k6  = useTransform(pullY, (v) => v * 0.30);
-  const k7  = useTransform(pullY, (v) => v * 0.33);
-  const k8  = useTransform(pullY, (v) => v * 0.36);
-  const k9  = useTransform(pullY, (v) => v * 0.39);
+
+  const k0 = useTransform(pullY, (v) => v * 0.04);
+  const k1 = useTransform(pullY, (v) => v * 0.09);
+  const k2 = useTransform(pullY, (v) => v * 0.14);
+  const k3 = useTransform(pullY, (v) => v * 0.18);
+  const k4 = useTransform(pullY, (v) => v * 0.22);
+  const k5 = useTransform(pullY, (v) => v * 0.26);
+  const k6 = useTransform(pullY, (v) => v * 0.30);
+  const k7 = useTransform(pullY, (v) => v * 0.33);
+  const k8 = useTransform(pullY, (v) => v * 0.36);
+  const k9 = useTransform(pullY, (v) => v * 0.39);
   const k10 = useTransform(pullY, (v) => v * 0.42);
   const knotYs = [k0, k1, k2, k3, k4, k5, k6, k7, k8, k9, k10];
   const ringY = useTransform(pullY, (v) => v);
+
 
   useEffect(() => {
     if (isPulling || isHovered) return;
@@ -50,10 +56,13 @@ export default function RopePull() {
     return () => ctrl.stop();
   }, [isPulling, isHovered, swayRotate]);
 
+
   if (!mounted) return null;
 
+
   const isDark = theme === "dark";
-  const accent = isDark ? "#818CF8" : "#4F46E5";
+  const accent = isDark ? "#C4A882" : "#8B6914";
+
 
   function onEnter() {
     if (isTouchDevice) return;
@@ -62,12 +71,14 @@ export default function RopePull() {
     swayRotate.set(2.5);
   }
 
+
   function onLeave() {
     if (isTouchDevice) return;
     setIsHovered(false);
     opacity.set(0.35);
     swayRotate.set(0);
   }
+
 
   async function onClick() {
     if (isPulling) return;
@@ -82,10 +93,12 @@ export default function RopePull() {
     setIsPulling(false);
   }
 
+
   function onTouchStart(e: React.TouchEvent) {
-    e.preventDefault(); // prevent ghost click
+    e.preventDefault();
     onClick();
   }
+
 
   return (
     <motion.div
@@ -109,6 +122,7 @@ export default function RopePull() {
           stroke={accent} strokeWidth="1.5" strokeLinecap="round" opacity="0.35"
         />
       </svg>
+
 
       {/* Rope */}
       <svg
@@ -135,6 +149,7 @@ export default function RopePull() {
           );
         })}
       </svg>
+
 
       {/* Ring */}
       <motion.div style={{ y: ringY }} className="flex flex-col items-center">
@@ -172,7 +187,8 @@ export default function RopePull() {
         </motion.div>
       </motion.div>
 
-      {/* Tooltip — desktop hover only, hidden on touch devices */}
+
+      {/* Tooltip */}
       {!isTouchDevice && (
         <motion.div
           initial={{ opacity: 0, x: 8, scale: 0.92 }}
@@ -190,8 +206,7 @@ export default function RopePull() {
           <span
             className="absolute right-[-5px] top-1/2 -translate-y-1/2"
             style={{
-              width: 0,
-              height: 0,
+              width: 0, height: 0,
               borderTop: "4px solid transparent",
               borderBottom: "4px solid transparent",
               borderLeft: `5px solid ${accent}`,

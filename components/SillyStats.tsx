@@ -1,21 +1,38 @@
 "use client";
 
+
 import { useEffect, useState } from "react";
 import { GitHubCalendar } from "react-github-calendar";
 
+
 const EMAIL_START = new Date("2023-08-01").getTime();
+
+
+function getCurrentVibe(): { value: string; sub: string } {
+    const hour = new Date().getHours();
+    if (hour >= 5 && hour < 9) return { value: "caffeinating", sub: "don't talk to me yet" };
+    if (hour >= 9 && hour < 13) return { value: "in the zone", sub: "do not disturb" };
+    if (hour >= 13 && hour < 15) return { value: "post-lunch lag", sub: "fighting the sleepy" };
+    if (hour >= 15 && hour < 19) return { value: "one more feat.", sub: "famous last words" };
+    if (hour >= 19 && hour < 22) return { value: "debugging", sub: "it worked yesterday" };
+    if (hour >= 22 && hour < 24) return { value: "night owl mode", sub: "peak productivity" };
+    return { value: "send help", sub: "it's past midnight bro" };
+}
+
 
 export default function SillyStats() {
     const [mounted, setMounted] = useState(false);
     const [seconds, setSeconds] = useState(0);
     const [clicks, setClicks] = useState(0);
     const [scrollPx, setScrollPx] = useState(0);
-    const [lastClick, setLastClick] = useState(0);
     const [rageClicks, setRageClicks] = useState(0);
     const [isDark, setIsDark] = useState(true);
+    const [vibe, setVibe] = useState({ value: "...", sub: "..." });
+
 
     useEffect(() => {
         setMounted(true);
+        setVibe(getCurrentVibe());
 
         const updateTheme = () =>
             setIsDark(document.documentElement.classList.contains("dark"));
@@ -26,7 +43,11 @@ export default function SillyStats() {
             attributeFilter: ["class"],
         });
 
-        const tick = setInterval(() => setSeconds((s) => s + 1), 1000);
+        const tick = setInterval(() => {
+            setSeconds((s) => s + 1);
+            setVibe(getCurrentVibe());
+        }, 1000);
+
         const onScroll = () => setScrollPx((p) => p + 1);
 
         let lastClickTime = 0;
@@ -35,7 +56,6 @@ export default function SillyStats() {
             setClicks((c) => c + 1);
             if (now - lastClickTime < 400) setRageClicks((r) => r + 1);
             lastClickTime = now;
-            setLastClick(now);
         };
 
         window.addEventListener("mousedown", onMouseDown);
@@ -67,73 +87,68 @@ export default function SillyStats() {
             value: mounted ? timeStr : "0s",
             label: "time wasted here",
             sub: "could've shipped a feature",
-            live: true,
-            accent: false,
+            live: true, accent: false,
         },
         {
             value: mounted ? clicks.toString() : "0",
             label: "times you've clicked",
-            sub: rageClicks > 3 ? `${rageClicks} were rage clicks 💀` : "looking for bugs?",
-            live: true,
-            accent: rageClicks > 3,
+            sub: rageClicks > 3 ? `${rageClicks} were rage clicks 💀` : "still looking for bugs?",
+            live: true, accent: rageClicks > 3,
         },
         {
             value: mounted ? `${scrollMetres}m` : "0.0m",
             label: "scrolled so far",
-            sub: "in actual metres",
-            live: true,
-            accent: false,
+            sub: "your thumb needs a raise",
+            live: true, accent: false,
+        },
+        {
+            value: mounted ? vibe.value : "...",
+            label: "current vibe",
+            sub: mounted ? vibe.sub : "...",
+            live: true, accent: false,
         },
         {
             value: chaiCount,
             label: "chai consumed",
-            sub: "since college started",
-            live: false,
-            accent: false,
+            sub: "doctor is not aware",
+            live: false, accent: false,
         },
         {
             value: "100+",
             label: "dsa problems",
-            sub: "mostly on leetcode",
-            live: false,
-            accent: false,
+            sub: "ctrl+c, ctrl+v included",
+            live: false, accent: false,
         },
         {
             value: estimatedTabs,
-            label: "tabs probably open",
-            sub: "on your browser rn",
-            live: false,
-            accent: false,
+            label: "tabs open rn",
+            sub: "your ram is crying",
+            live: false, accent: false,
         },
         {
             value: "100+",
             label: "git commits",
-            sub: `"fix typo" counted`,
-            live: false,
-            accent: false,
-        },
-        {
-            value: "1",
-            label: "sleep schedules",
-            sub: "currently: none",
-            live: false,
-            accent: false,
+            sub: `42% say "fix stuff"`,
+            live: false, accent: false,
         },
     ];
+
+    const calendarDark = ["#111111", "#2C2118", "#6B4A28", "#A67840", "#C4A882"];
+    const calendarLight = ["#E0DCD4", "#D4C4A8", "#C4A882", "#A67840", "#8B6914"];
 
     return (
         <section>
             <div className="mb-2 flex items-center gap-3">
                 <h2 className="font-mono text-xs uppercase tracking-[0.2em] dark:text-d-accent text-l-accent font-semibold">
-                    Silly Stats
+                    // dev.log
                 </h2>
                 <span className="h-px flex-1 dark:bg-d-border bg-l-border" />
             </div>
-            <p className="mb-6 font-mono text-[11px] dark:text-zinc-600 text-zinc-400">
+            <p className="mb-6 font-mono text-[11px] dark:text-zinc-600 text-zinc-500">
                 live since page load · no cookies · no tracking · pure chaos
             </p>
 
-            <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-4">
+            <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-4 mb-2.5">
                 {stats.map((s) => (
                     <div
                         key={s.label}
@@ -175,8 +190,8 @@ export default function SillyStats() {
                                     year={2026}
                                     colorScheme={isDark ? "dark" : "light"}
                                     theme={{
-                                        dark: ["#1e1e2e", "#312e81", "#4338ca", "#6366f1", "#818cf8"],
-                                        light: ["#e8e6f0", "#c7d2fe", "#a5b4fc", "#6366f1", "#4F46E5"],
+                                        dark: calendarDark,
+                                        light: calendarLight,
                                     }}
                                     fontSize={11}
                                     blockSize={11}
@@ -186,19 +201,15 @@ export default function SillyStats() {
                             </div>
                         </div>
 
-                        {/* Custom Less/More legend */}
                         <div className="flex items-center gap-2">
                             <span className="font-mono text-[9px] dark:text-zinc-600 text-zinc-400">less</span>
-                            {["#1e1e2e", "#312e81", "#4338ca", "#6366f1", "#818cf8"].map((dark, i) => {
-                                const light = ["#e8e6f0", "#c7d2fe", "#a5b4fc", "#6366f1", "#4F46E5"][i];
-                                return (
-                                    <span
-                                        key={i}
-                                        className="h-[11px] w-[11px] rounded-[3px] inline-block"
-                                        style={{ backgroundColor: isDark ? dark : light }}
-                                    />
-                                );
-                            })}
+                            {calendarDark.map((dark, i) => (
+                                <span
+                                    key={i}
+                                    className="h-[11px] w-[11px] rounded-[3px] inline-block"
+                                    style={{ backgroundColor: isDark ? dark : calendarLight[i] }}
+                                />
+                            ))}
                             <span className="font-mono text-[9px] dark:text-zinc-600 text-zinc-400">more</span>
                         </div>
                     </>

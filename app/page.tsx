@@ -1,5 +1,6 @@
 "use client";
 
+
 import { useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import Image from "next/image";
@@ -11,6 +12,7 @@ import MusicPlayer from "@/components/MusicPlayer";
 import VanGoghQuote from "@/components/VanGoghQuote";
 import { projects, type Project } from "@/lib/projects";
 
+
 const skills = {
   languages: ["JavaScript (ES6+)", "TypeScript", "SQL"],
   frontend: ["React.js", "Next.js", "Tailwind CSS", "HTML5 Canvas API"],
@@ -18,6 +20,7 @@ const skills = {
   databases: ["PostgreSQL", "MongoDB", "Supabase"],
   tools: ["Git", "Docker", "CI/CD", "Vercel", "Postman"],
 };
+
 
 const blogs = [
   {
@@ -50,14 +53,18 @@ const blogs = [
   },
 ];
 
+
 const socials = [
   { l: "github", h: "https://github.com/mbbairagii" },
+  { l: "linkedin", h: "https://www.linkedin.com/in/mohini-ships/" },
   { l: "x", h: "https://x.com/mohinitwt" },
   { l: "medium", h: "https://medium.com/@mbbairagii" },
   { l: "email", h: "mailto:mbbairagii@gmail.com" },
 ];
 
+
 const navLinks = ["projects", "skills", "stats"];
+
 
 export default function Home() {
   const [showBlogs, setShowBlogs] = useState(false);
@@ -65,11 +72,13 @@ export default function Home() {
   const [mobileMenu, setMobileMenu] = useState(false);
   const blogsRef = useRef<HTMLDivElement>(null);
 
+
   function handleWritingClick() {
     setShowBlogs(true);
     setMobileMenu(false);
     setTimeout(() => blogsRef.current?.scrollIntoView({ block: "start" }), 80);
   }
+
 
   function scrollTo(id: string) {
     setMobileMenu(false);
@@ -78,12 +87,15 @@ export default function Home() {
     el.scrollIntoView({ block: "start" });
   }
 
+
   return (
     <div className="relative min-h-screen dark:bg-d-bg bg-l-bg font-sans">
+
 
       {/* ── Navbar ──────────────────────────────────────────── */}
       <header className="fixed inset-x-0 top-0 z-40 dark:bg-d-bg/90 bg-l-bg/90 backdrop-blur-md dark:border-b dark:border-d-border border-b border-l-border">
         <nav className="mx-auto flex max-w-5xl items-center justify-between px-4 md:px-6 py-3.5">
+
 
           <div className="flex items-center gap-3">
             <div className="relative h-8 w-8 overflow-hidden rounded-lg dark:border dark:border-d-border border border-l-border">
@@ -93,6 +105,7 @@ export default function Home() {
               Mohini
             </span>
           </div>
+
 
           {/* Desktop links */}
           <div className="hidden md:flex items-center gap-7">
@@ -112,6 +125,7 @@ export default function Home() {
             </button>
           </div>
 
+
           {/* Mobile: contact + hamburger */}
           <div className="flex md:hidden items-center gap-3">
             <button onClick={() => setShowContact(true)}
@@ -126,6 +140,7 @@ export default function Home() {
             </button>
           </div>
         </nav>
+
 
         {/* Mobile dropdown */}
         <AnimatePresence>
@@ -154,13 +169,16 @@ export default function Home() {
         </AnimatePresence>
       </header>
 
+
       {/* ── Rope ─────────────────────────────────────────────── */}
       <div className="fixed right-4 top-16 md:right-7 md:top-6 z-50">
         <RopePull />
       </div>
 
+
       {/* ── Main ────────────────────────────────────────────── */}
       <main className="mx-auto max-w-5xl px-4 md:px-6 pb-0 pt-16 md:pt-20 space-y-4">
+
 
         {/* ── HERO ──────────────────────────────────────────── */}
         <motion.div
@@ -171,11 +189,13 @@ export default function Home() {
         >
           <div className="pointer-events-none absolute -right-20 -top-20 h-64 w-64 rounded-full bg-d-accent2/10 blur-3xl" />
 
+
           <div className="flex items-start justify-between gap-6 md:gap-8">
             <div className="flex flex-col gap-4 flex-1 min-w-0">
               <p className="font-mono text-xs uppercase tracking-[0.22em] dark:text-d-accent text-l-accent font-semibold">
                 Portfolio / 2026
               </p>
+
 
               <div>
                 <h1 className="font-display text-[clamp(2.4rem,8vw,5rem)] font-semibold leading-none tracking-tight dark:text-zinc-100 text-zinc-900">
@@ -186,9 +206,11 @@ export default function Home() {
                 </p>
               </div>
 
+
               <p className="font-mono text-xs md:text-sm dark:text-zinc-500 text-zinc-500">
-                cs @ gl bajaj · i obsess over details most people skip.
+                · i obsess over details most people skip.
               </p>
+
 
               <div className="flex items-center gap-3 flex-wrap">
                 <div className="flex items-center gap-2">
@@ -198,7 +220,11 @@ export default function Home() {
                 <span className="rounded-full dark:border dark:border-d-border border border-l-border px-3 py-1 font-mono text-xs dark:text-zinc-400 text-zinc-600">
                   Remote
                 </span>
+                <span className="rounded-full dark:border dark:border-d-border border border-l-border px-3 py-1 font-mono text-xs dark:text-zinc-400 text-zinc-600">
+                  Internship
+                </span>
               </div>
+
 
               <div className="flex flex-wrap gap-2 pt-1">
                 {socials.map((s) => (
@@ -209,12 +235,9 @@ export default function Home() {
                     {s.l} ↗
                   </a>
                 ))}
-                <a href="/resume_latest.pdf" target="_blank" rel="noopener noreferrer"
-                  className="flex items-center gap-1.5 rounded-full dark:bg-d-accent/10 bg-l-accent/10 dark:border dark:border-d-accent/30 border border-l-accent/30 px-3 md:px-4 py-1.5 font-mono text-[11px] md:text-xs dark:text-d-accent text-l-accent transition-colors dark:hover:bg-d-accent/20 hover:bg-l-accent/20">
-                  resume ↗
-                </a>
               </div>
             </div>
+
 
             {/* Photo */}
             <div className="shrink-0">
@@ -226,6 +249,7 @@ export default function Home() {
           </div>
         </motion.div>
 
+
         {/* ── TECH STACK ────────────────────────────────────── */}
         <motion.div
           initial={{ opacity: 0, y: 16 }}
@@ -235,6 +259,7 @@ export default function Home() {
         >
           <TechStack />
         </motion.div>
+
 
         {/* ── PROJECTS ──────────────────────────────────────── */}
         <motion.div
@@ -254,6 +279,7 @@ export default function Home() {
             </a>
           </div>
 
+
           <div className="grid gap-4 md:grid-cols-2">
             {projects.map((p: Project) => (
               <motion.div key={p.id}
@@ -272,9 +298,10 @@ export default function Home() {
                       className="object-cover object-top transition-transform duration-500 hover:scale-105"
                       quality={75}
                     />
-                    <div className="absolute inset-0 bg-gradient-to-b dark:from-transparent dark:to-d-bg/80 from-transparent to-l-bg/80" />
+                    <div className="absolute inset-0 bg-gradient-to-b dark:from-transparent dark:to-d-bg/80 from-transparent to-l-bg/20" />
                   </div>
                 )}
+
 
                 {/* Content */}
                 <div className="flex flex-col gap-3 p-4 md:p-5">
@@ -288,6 +315,7 @@ export default function Home() {
                     )}
                   </div>
 
+
                   <div className="flex flex-wrap gap-1.5">
                     {p.tech.map((t: string) => (
                       <span key={t}
@@ -297,9 +325,11 @@ export default function Home() {
                     ))}
                   </div>
 
+
                   <p className="text-sm font-medium dark:text-zinc-300 text-zinc-700 leading-snug">
                     {p.description}
                   </p>
+
 
                   <ul className="flex flex-col gap-1.5">
                     {p.bullets.map((b: string, i: number) => (
@@ -314,6 +344,7 @@ export default function Home() {
             ))}
           </div>
         </motion.div>
+
 
         {/* ── SKILLS ────────────────────────────────────────── */}
         <div id="skills"
@@ -341,6 +372,7 @@ export default function Home() {
             ))}
           </div>
 
+
           {/* ── currently obsessing over ── */}
           <div className="mt-6 pt-5 border-t dark:border-d-border border-l-border flex flex-wrap items-center gap-x-3 gap-y-1 md:gap-6">
             <span className="font-mono text-[10px] uppercase tracking-[0.18em] shrink-0 dark:text-zinc-600 text-zinc-400">
@@ -354,8 +386,10 @@ export default function Home() {
           </div>
         </div>
 
+
         {/* ── VAN GOGH QUOTE ────────────────────────────────── */}
         <VanGoghQuote />
+
 
         {/* ── SILLY STATS ───────────────────────────────────── */}
         <div id="stats"
@@ -363,6 +397,7 @@ export default function Home() {
         >
           <SillyStats />
         </div>
+
 
         {/* ── WRITING ───────────────────────────────────────── */}
         <div ref={blogsRef}>
@@ -415,6 +450,7 @@ export default function Home() {
             )}
           </AnimatePresence>
 
+
           {!showBlogs && (
             <div className="flex items-center gap-3 px-2 py-4">
               <span className="font-mono text-xs dark:text-zinc-600 text-zinc-400">i also write —</span>
@@ -425,6 +461,7 @@ export default function Home() {
             </div>
           )}
         </div>
+
 
         {/* ── CTA ───────────────────────────────────────────── */}
         <motion.div
@@ -446,6 +483,7 @@ export default function Home() {
           </button>
         </motion.div>
 
+
         {/* ── FOOTER ────────────────────────────────────────── */}
         <footer className="pt-2 pb-0">
           <div className="flex items-center justify-between border-t dark:border-d-border border-l-border py-5 px-1">
@@ -464,6 +502,7 @@ export default function Home() {
             </div>
           </div>
 
+
           <div className="overflow-hidden -mx-4 md:-mx-6 pb-0">
             <p
               className="font-display font-bold leading-none tracking-tighter whitespace-nowrap text-center select-none dark:text-white/[0.035] text-black/[0.055]"
@@ -474,7 +513,9 @@ export default function Home() {
           </div>
         </footer>
 
+
       </main>
+
 
       <ContactModal open={showContact} onClose={() => setShowContact(false)} />
       <MusicPlayer />

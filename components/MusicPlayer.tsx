@@ -1,15 +1,19 @@
 "use client";
 
+
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
+
 const VIDEO_ID = "ue2G0dC-TZI";
+
 
 export default function MusicPlayer() {
     const [expanded, setExpanded] = useState(false);
     const [loaded, setLoaded] = useState(false);
     const [hovered, setHovered] = useState(false);
     const [isDark, setIsDark] = useState(true);
+
 
     useEffect(() => {
         const update = () =>
@@ -23,12 +27,14 @@ export default function MusicPlayer() {
         return () => observer.disconnect();
     }, []);
 
-    const card = isDark ? "#0F0F1A" : "#E8E6F0";
-    const border = isDark ? "#1e1e2e" : "#C4C2D4";
-    const accent = isDark ? "#818CF8" : "#4F46E5";
-    const text = isDark ? "#f4f4f5" : "#1a1a2e";
-    const sub = isDark ? "#52525b" : "#71717a";
-    const bg = isDark ? "#09090F" : "#DDDBE8";
+
+    const card = isDark ? "#111111" : "#E0DCD4";
+    const border = isDark ? "#2A2A2A" : "#C8C4BC";
+    const accent = isDark ? "#C4A882" : "#8B6914";
+    const text = isDark ? "#F0EDE8" : "#1A1714";
+    const sub = isDark ? "#525252" : "#7A7670";
+    const bg = isDark ? "#000000" : "#E8E4DC";
+
 
     return (
         <motion.div
@@ -38,7 +44,6 @@ export default function MusicPlayer() {
             className="fixed bottom-6 left-4 z-[80]"
         >
             <AnimatePresence mode="wait">
-
                 {expanded ? (
                     <motion.div
                         key="expanded"
@@ -73,6 +78,7 @@ export default function MusicPlayer() {
                             </button>
                         </div>
 
+
                         <div
                             style={{ borderColor: border, backgroundColor: bg }}
                             className="relative overflow-hidden rounded-xl border"
@@ -97,6 +103,7 @@ export default function MusicPlayer() {
                             />
                         </div>
 
+
                         <a
                             href={`https://www.youtube.com/watch?v=${VIDEO_ID}`}
                             target="_blank"
@@ -107,9 +114,7 @@ export default function MusicPlayer() {
                             open on youtube ↗
                         </a>
                     </motion.div>
-
                 ) : (
-
                     <div
                         className="relative"
                         onMouseEnter={() => setHovered(true)}
@@ -137,6 +142,7 @@ export default function MusicPlayer() {
                                 </motion.div>
                             )}
                         </AnimatePresence>
+
 
                         <motion.button
                             key="square"
@@ -196,7 +202,6 @@ export default function MusicPlayer() {
                         </motion.button>
                     </div>
                 )}
-
             </AnimatePresence>
         </motion.div>
     );

@@ -1,5 +1,6 @@
 import type { Config } from "tailwindcss";
 
+
 const config: Config = {
   darkMode: "class",
   content: [
@@ -15,15 +16,15 @@ const config: Config = {
         mono: ["ui-monospace", "SFMono-Regular", "monospace"],
       },
       colors: {
-        "d-bg": "#09090F",
-        "d-card": "#0F0F1A",
-        "d-border": "#1C1C30",
-        "d-accent": "#818CF8",
-        "d-accent2": "#A78BFA",
-        "l-bg": "#CCCAD8",
-        "l-card": "#D8D6E4",
-        "l-border": "#7B78A0",   // ← was #B0AEBF, now much darker/more visible
-        "l-accent": "#4F46E5",
+        "d-bg": "#000000",
+        "d-card": "#111111",
+        "d-border": "#2A2A2A",
+        "d-accent": "#C4A882",
+        "d-accent2": "#D4BC9A",
+        "l-bg": "#E8E4DC",
+        "l-card": "#E0DCD4",
+        "l-border": "#C8C4BC",
+        "l-accent": "#8B6914",
       },
       animation: {
         marquee: "marquee 28s linear infinite",
@@ -38,5 +39,6 @@ const config: Config = {
   },
   plugins: [],
 };
+
 
 export default config;
