@@ -16,15 +16,15 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: "Mohini | Portfolio",
-    description: "Full-stack developer. cs @ gl bajaj · i obsess over details most people skip.",
+    description: "Full-stack developer. · i obsess over details most people skip.",
     url: "https://mohini.is-a.dev", // ← same URL here
-    images: [{ url: "/og-image.png", width: 1200, height: 630, alt: "Mohini — Full-stack Developer" }],
+    images: [{ url: "/og-image-v2.png", width: 1200, height: 630, alt: "Mohini — Full-stack Developer" }],
   },
   twitter: {
     card: "summary_large_image",
     title: "Mohini | Portfolio",
-    description: "Full-stack developer. cs @ gl bajaj · i obsess over details most people skip.",
-    images: ["/og-image.png"],
+    description: "Full-stack developer. · i obsess over details most people skip.",
+    images: ["/og-image-v2.png"],
   },
 };
 
