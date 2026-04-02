@@ -140,7 +140,7 @@ export default function SillyStats() {
         <section>
             <div className="mb-2 flex items-center gap-3">
                 <h2 className="font-mono text-xs uppercase tracking-[0.2em] dark:text-d-accent text-l-accent font-semibold">
-                    // dev.log
+                    {'dev.log'}
                 </h2>
                 <span className="h-px flex-1 dark:bg-d-border bg-l-border" />
             </div>
