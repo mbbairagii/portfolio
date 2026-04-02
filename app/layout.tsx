@@ -4,7 +4,7 @@ import "../styles/globals.css";
 export const metadata: Metadata = {
   title: "Mohini | Portfolio",
   description: "Full-stack developer. cs @ gl bajaj · i build complete products end-to-end.",
-  metadataBase: new URL("https://mohini.is-a.dev"), // ← replace with your actual URL
+  metadataBase: new URL("mohini.is-a.dev"), // ← replace with your actual URL
   icons: {
     icon: [
       { url: "/favicon-16.png", sizes: "16x16", type: "image/png" },
@@ -17,7 +17,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Mohini | Portfolio",
     description: "Full-stack developer. cs @ gl bajaj · i obsess over details most people skip.",
-    url: "https://mohini.is-a.dev", // ← same URL here
+    url: "mohini.is-a.dev", // ← same URL here
     images: [{ url: "/og-image.png", width: 1200, height: 630, alt: "Mohini — Full-stack Developer" }],
   },
   twitter: {
