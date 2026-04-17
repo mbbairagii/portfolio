@@ -100,7 +100,7 @@ export default function Home() {
       <div
         className="fixed inset-0 z-0 pointer-events-none block dark:hidden"
         style={{
-          backgroundImage: "url('/comicl.jpeg')",
+          backgroundImage: "url('/comicl.webp')",
           backgroundSize: "cover",
           backgroundPosition: "center",
           backgroundAttachment: "fixed",
@@ -111,7 +111,7 @@ export default function Home() {
       <div
         className="fixed inset-0 z-0 pointer-events-none hidden dark:block"
         style={{
-          backgroundImage: "url('/comicb.png')",
+          backgroundImage: "url('/comicb.webp')",
           backgroundSize: "cover",
           backgroundPosition: "center",
           backgroundAttachment: "fixed",
