@@ -99,7 +99,7 @@ export default function Home() {
 
           <div className="flex items-center gap-3">
             <div className="relative h-8 w-8 overflow-hidden rounded-lg dark:border dark:border-d-border border border-l-border">
-              <Image src="/avatar.png" alt="Mohini" fill className="object-cover object-top" />
+              <Image src="/main.png" alt="Mohini" fill className="object-cover object-top" />
             </div>
             <span className="font-mono text-xs font-bold uppercase tracking-[0.18em] dark:text-zinc-200 text-zinc-800">
               Mohini
@@ -242,7 +242,7 @@ export default function Home() {
             {/* Photo */}
             <div className="shrink-0">
               <div className="relative h-[160px] w-[125px] md:h-[260px] md:w-[200px] overflow-hidden rounded-2xl dark:border dark:border-d-border border border-l-border shadow-lg">
-                <Image src="/avatar.png" alt="Mohini" fill className="object-cover object-top" priority />
+                <Image src="/main.png" alt="Mohini" fill className="object-cover object-top" priority />
                 <div className="absolute inset-0 bg-gradient-to-t from-d-accent/10 via-transparent to-transparent" />
               </div>
             </div>
