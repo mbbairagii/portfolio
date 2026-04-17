@@ -61,7 +61,7 @@ export default function RopePull() {
 
 
   const isDark = theme === "dark";
-  const accent = isDark ? "#C4A882" : "#8B6914";
+  const accent = isDark ? "#ffffff" : "#000000";;
 
 
   function onEnter() {

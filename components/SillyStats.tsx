@@ -133,8 +133,8 @@ export default function SillyStats() {
         },
     ];
 
-    const calendarDark = ["#111111", "#2C2118", "#6B4A28", "#A67840", "#C4A882"];
-    const calendarLight = ["#E0DCD4", "#D4C4A8", "#C4A882", "#A67840", "#8B6914"];
+    const calendarDark = ["#1a1a1a", "#2e2e2e", "#4a4a4a", "#757575", "#ffffff"];
+    const calendarLight = ["#e8e8e8", "#c0c0c0", "#909090", "#505050", "#000000"];
 
     return (
         <section>

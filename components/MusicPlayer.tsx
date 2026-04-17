@@ -28,12 +28,12 @@ export default function MusicPlayer() {
     }, []);
 
 
-    const card = isDark ? "#111111" : "#E0DCD4";
-    const border = isDark ? "#2A2A2A" : "#C8C4BC";
-    const accent = isDark ? "#C4A882" : "#8B6914";
-    const text = isDark ? "#F0EDE8" : "#1A1714";
-    const sub = isDark ? "#525252" : "#7A7670";
-    const bg = isDark ? "#000000" : "#E8E4DC";
+    const card = isDark ? "#111111" : "#f2f2f2";
+    const border = isDark ? "#222222" : "#d9d9d9";
+    const accent = isDark ? "#ffffff" : "#000000";  // ← was warm gold
+    const text = isDark ? "#f0f0f0" : "#0a0a0a";
+    const sub = isDark ? "#555555" : "#888888";
+    const bg = isDark ? "#080808" : "#fafafa";
 
 
     return (

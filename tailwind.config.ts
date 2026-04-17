@@ -11,20 +11,20 @@ const config: Config = {
   theme: {
     extend: {
       fontFamily: {
-        display: ["Clash Display", "sans-serif"],
-        sans: ["Satoshi", "sans-serif"],
-        mono: ["ui-monospace", "SFMono-Regular", "monospace"],
+        display: ['Bebas Neue', 'sans-serif'],
+        mono: ['DM Mono', 'monospace'],
+        sans: ['DM Sans', 'sans-serif'],
       },
       colors: {
-        "d-bg": "#000000",
-        "d-card": "#111111",
-        "d-border": "#2A2A2A",
-        "d-accent": "#C4A882",
-        "d-accent2": "#D4BC9A",
-        "l-bg": "#E8E4DC",
-        "l-card": "#E0DCD4",
-        "l-border": "#C8C4BC",
-        "l-accent": "#8B6914",
+        'd-bg': '#080808',
+        'd-card': '#111111',
+        'd-border': '#222222',
+        'd-accent': '#ffffff',
+        'd-accent2': '#555555',
+        'l-bg': '#d4d0c8',   // noticeably darker warm gray — matches photo bg
+        'l-card': '#d9d5cd',   // card sits just above bg
+        'l-border': '#b8b4ac',   // stronger border, still warm
+        'l-accent': '#0a0a0a',
       },
       animation: {
         marquee: "marquee 28s linear infinite",
