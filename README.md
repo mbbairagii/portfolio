@@ -13,7 +13,7 @@ Personal portfolio website built with Next.js 14, TypeScript, and Tailwind CSS.
 | Styling   | Tailwind CSS + custom design tokens |
 | Animation | Framer Motion                       |
 | Icons     | react-icons                         |
-| Fonts     | Clash Display, Satoshi              |
+| Fonts     | Bebas Neue font                     |
 
 ---
 
