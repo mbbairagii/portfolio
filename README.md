@@ -34,7 +34,7 @@ Personal portfolio website built with Next.js 14, TypeScript, and Tailwind CSS.
 
 ```bash
 # 1. clone
-git clone https://github.com/your-username/portfolio.git
+git clone https://github.com/mbbairagii/portfolio.git
 cd portfolio
 
 # 2. install
@@ -88,23 +88,6 @@ PORTFOLIO/
 ├── tailwind.config.ts
 └── tsconfig.json
 ```
-
----
-
-## Customisation
-
-**Colors** — all tokens live in `tailwind.config.ts`:
-```ts
-"d-bg":     "#09090F"   // dark background
-"d-card":   "#0F0F1A"   // dark card
-"d-accent": "#818CF8"   // indigo accent
-"l-bg":     "#CCCAD8"   // light background
-"l-accent": "#4F46E5"   // light accent
-```
-
-**Projects** — edit `lib/projects.ts`
-
-**Blogs** — edit the `blogs` array in `app/page.tsx`
 
 ---
 
